@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --os-bg: #0a0e1a;
+  --os-desktop: #0f172a;
+  --os-panel: #1e293b;
+  --os-cyan: #06b6d4;
+  --os-cyan-glow: #22d3ee;
+  --os-teal: #14b8a6;
+  --os-green: #10b981;
+  --os-text: #f1f5f9;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--os-bg);
+  color: var(--os-text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Desktop background grid */
+.desktop-bg {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(6, 182, 212, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(20, 184, 166, 0.06), transparent 50%),
+    linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* Glass panel */
+.glass {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+
+/* Cursor block */
+.cursor-block::after {
+  content: "█";
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  color: #22d3ee;
+}
+
+/* Terminal text glow */
+.term-glow { text-shadow: 0 0 4px currentColor; }
+
+/* Scanline overlay */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* RGB glitch */
+.glitch-on {
+  animation: glitch 0.3s linear;
+  text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); filter: none; }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(2px, -2px); filter: hue-rotate(20deg); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+/* Holographic ring */
+.holo-ring {
+  background: conic-gradient(
+    from 0deg,
+    #06b6d4,
+    #14b8a6,
+    #22d3ee,
+    #10b981,
+    #06b6d4
+  );
+  animation: spin 6s linear infinite;
+}
+
+/* No text selection during drag */
+.dragging * { user-select: none !important; }
+
+/* Window appear glow */
+.window-focus {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(34, 211, 238, 0.4),
+              0 0 24px rgba(6, 182, 212, 0.25);
+}
